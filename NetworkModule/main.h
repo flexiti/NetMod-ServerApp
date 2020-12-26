@@ -31,7 +31,9 @@
 #define NUM_DEBUG_BYTES 46
 
 int main(void);
+void init_IWDG(void);
 void unlock_eeprom(void);
+void lock_eeprom(void);
 void check_eeprom_settings(void);
 void check_eeprom_IOpin_settings(void);
 void update_mac_string(void);
@@ -45,6 +47,7 @@ void reboot(void);
 void oneflash(void);
 void fastflash(void);
 void debugflash(void);
+void clear_eeprom_debug_bytes(void);
 void update_debug_storage(void);
 void update_debug_storage1(void);
 void capture_uip_buf_transmit(void);
@@ -64,11 +67,14 @@ int8_t reverse_bit_order(uint8_t k);
 #define MQTT_START_VERIFY_ARP		2
 #define MQTT_START_VERIFY_TCP		3
 #define MQTT_START_QUEUE_CONNECT	4
-#define MQTT_START_QUEUE_SUBSCRIBE1	5
-#define MQTT_START_QUEUE_SUBSCRIBE2	6
-#define MQTT_START_QUEUE_SUBSCRIBE3	7
-#define MQTT_START_QUEUE_SUBSCRIBE4	8
-#define MQTT_START_QUEUE_PUBLISH	9
+#define MQTT_START_VERIFY_CONNACK	5
+#define MQTT_START_QUEUE_SUBSCRIBE1	6
+#define MQTT_START_QUEUE_SUBSCRIBE2	7
+#define MQTT_START_QUEUE_SUBSCRIBE3	8
+#define MQTT_START_QUEUE_SUBSCRIBE4	9
+#define MQTT_START_QUEUE_PUBLISH_ON	10
+#define MQTT_START_QUEUE_PUBLISH_AUTO   11
+#define MQTT_START_QUEUE_PUBLISH_PINS	12
 #define MQTT_START_COMPLETE		20
   
 #define MQTT_START_NOT_STARTED		0x00
@@ -92,11 +98,13 @@ int8_t reverse_bit_order(uint8_t k);
 #define RESTART_REBOOT_IDLE		0
 #define RESTART_REBOOT_ARM		1
 #define RESTART_REBOOT_ARM2		2
-#define RESTART_REBOOT_DISCONNECT	3
-#define RESTART_REBOOT_DISCONNECTWAIT	4
-#define RESTART_REBOOT_TCPCLOSE		5
-#define RESTART_REBOOT_TCPWAIT		6
-#define RESTART_REBOOT_FINISH		7
+#define RESTART_REBOOT_SENDOFFLINE	3
+#define RESTART_REBOOT_OFFLINEWAIT	4
+#define RESTART_REBOOT_DISCONNECT	5
+#define RESTART_REBOOT_DISCONNECTWAIT	6
+#define RESTART_REBOOT_TCPCLOSE		7
+#define RESTART_REBOOT_TCPWAIT		8
+#define RESTART_REBOOT_FINISH		9
 
 #define STATE_REQUEST_IDLE		0
 #define STATE_REQUEST_RCVD		1
